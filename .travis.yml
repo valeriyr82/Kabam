@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 0.10
+
+services:
+  - redis-server
+  - mongodb
+
+notifications:
+  email: false
+  hipchat: b83791c5d4b712de736d8c1e9f7fb8@271266
+
+before_install: sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++

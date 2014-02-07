@@ -1,0 +1,429 @@
+HOST: http://mykabam.herokuapp.com/
+
+--- mykabam ---
+
+Try to access any pages of site, and you need authorization for it
+GET /
+> Accept: text/html
+< 403
+< Content-Type: text/html
+{}
+
+Try to access any pages of site, and you need authorization for it
+GET /somepage
+> Accept: text/html
+< 403
+< Content-Type: text/html
+{}
+
+-- Sign up --
+Register with username, password and email address via angular frontend
+POST /auth/signup
+> Accept: application/json
+> Content-Type: application/json; charset=UTF-8
+{
+    "_csrf":"csrfCode",
+    "username":"usernameToUseForNewUser",
+    "email": "emailForNewUser@example.org",
+    "password": "myLongAndHardPassword"
+}
+< 201
+< Content-Type: application/json; charset=UTF-8
+{
+  "username":"usernameToUseForNewUser"
+  "email": "emailForNewUser@example.org"
+}
+
+Register with username, password and email address via static html form submit
+POST /auth/signup
+> Accept: application/x-www-form-urlencoded
+> Content-type: application/x-www-form-urlencoded
+{
+    "_csrf":"csrfCode",
+    "username":"usernameToUseForNewUser",
+    "email": "emailForNewUser@example.org",
+    "password": "myLongAndHardPassword"
+}
+< 301
+< Header: Location: /
+
+
+
+-- Sign up or sign in via google --
+Authorize (or sign up) via google
+GET /auth/google
+> Accept: text/html
+< 301
+
+
+-- Sign in or attach profile to keychain via 3rd party oAuth providers --
+
+
+Authorize via github
+GET /auth/github
+> Accept: text/html
+< 301
+
+
+Authorize via twitter
+GET /auth/twitter
+> Accept: text/html
+< 301
+
+
+Authorize via facebook
+GET /auth/facebook
+> Accept: text/html
+< 301
+
+
+-- Sign in via login and password --
+
+
+By submiting the form
+POST /auth/login
+> Accept: application/x-www-form-urlencoded
+> Content-type: application/x-www-form-urlencoded
+{
+    "_csrf":"csrfCode",
+    "username":"usernameToUseForNewUser",
+    "password": "myLongAndHardPassword"
+}
+< 301
+< Header: Location: /
+
+
+By angular application
+POST /auth/login
+> Accept: application/json
+> Content-type: application/json
+{
+    "_csrf":"csrfCode",
+    "username":"usernameToUseForNewUser",
+    "password": "myLongAndHardPassword"
+}
+< 202
+{
+  "username":"usernameToUseForNewUser",
+  "email": "emailForNewUser@example.org"
+}
+
+
+-- Private message --
+
+
+Get recent private message to this authorized user
+GET /api/messages
+< 200
+< Content-Type: application/json
+[
+    {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    },
+        {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    },
+        {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    }
+]
+
+Get recent private message in form of dialog with user of john1
+GET /api/messages/john1
+< 200
+< Content-Type: application/json
+[
+    {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    },
+        {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    },
+        {
+        "to": "523ea525e251a514514135325"
+        "toProfile":{
+        "username":"john1",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe1",
+        "lastName":"doe1",
+        "firstName":"john"
+        },
+        "from": "523ea525e251a514514135326",
+        "fromProfile":{
+        "username":"john2",
+        "gravatar":"https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+        "lang":"en",
+        "root":false,
+        "isBanned":"false",
+        "roles":[],
+        "skype":"johndoe2",
+        "lastName":"doe2",
+        "firstName":"john"
+        },
+        "message":"Hello, this is my message!"
+    }
+]
+
+Send message to user john1 via angularJS appliation
+POST /api/messages/john1
+> Accept: application/json
+> Content-Type: application/json; charset=UTF-8
+{
+     "message": "my message"
+}
+< 201
+< Content-Type: application/json; charset=UTF-8
+{"status":201,"description":"Message is send!"}
+
+Send message to user john1 via html form submit appliation
+POST /api/messages/john1
+> Accept: application/x-www-form-urlencoded
+> Content-type: application/x-www-form-urlencoded
+{
+    "message": "my message"
+}
+< 301
+< Header: Location: back
+
+
+-- kabam-plugin-my-profile --
+
+Get basic HTML page with form to edit this current user profile
+GET /auth/myProfile
+< 200
+< Content-Type: text/html; charset=UTF-8
+
+
+Edits the current user profile. For now works with this parameters, extracted from body of POST request
+POST /auth/myProfile
+> Accept: application/x-www-form-urlencoded
+> Content-type: application/x-www-form-urlencoded
+{
+ "firstName":"john",
+ "lastName":"doe",
+  "skype":"johndoe",
+  "password1":"mylongAndHardPassword"
+  "password2":"mylongAndHardPassword"
+}
+< 301
+< Header: Location: back
+
+
+
+-- kabam-plugin-rest --
+
+
+Classic REST interface for every kabam mongoose data model present.
+Consider that the current user is root, and he tryes to edit current users via rest full api.
+If user is not root, nothing is shown in case of users
+
+Get all users
+GET /api/rest/user
+< 200
+< Content-Type: application/json
+{
+    [
+        { 
+            "__v" : 0 , 
+            "_id" : 
+            { "$oid" : "5215f4e6cbf4096e10000001"} , 
+            "apiKey" : "faa2819134c61e69e74d4a5cf53618cdba5774b962ef547281fe31f8e0aaf0953e373790da6931004233564d3c902e2464c70904046cf7a3b113711b7d3b73b7" , 
+            "apiKeyCreatedAt" : { "$date" : "2013-08-22T11:24:22.849Z"} , 
+            "email" : "nowak@gmail.com" , 
+            "emailVerified" : true , 
+            "firstName" : "Anatolij" , 
+            "lastName" : "Nowak-Ostroumov" , 
+            "isBanned" : false , 
+            "isOnline" : true,
+            "lang" : "en" , 
+            "lastSeenOnline" : { "$date" : "2013-08-28T22:26:14.744Z"} , 
+            "password" : "f02a90f3747eb6401f46dfc4170cff32269a7eae187a1a9d45aa3d6a095652614beaada7d581f7f4be76de26b1d3ddfd5e0abd60039a2d31da17b30d114951ee" , 
+            "profileComplete" : true , 
+            "roles" : [ ] , 
+            "root" : true , 
+            "salt" : "223817bf61bb3e962efb56a42d8324a3831155ed4ee2a099f6ac83ccf534062b3e470f4f3ec57097312d8475bfd748ea41ba1682668d3bc18b74c6b3300aeaf3" , 
+            "username" : "vodolaz095"
+        },
+        {
+            "__v" : 0 , 
+            "_id" : { "$oid" : "521b9a308cd3bea60d000001"} , 
+            "apiKey" : "e78516372dd8801e9dba39138463313a2bcda955bdf54a33c96ff091b9381824b4644d02e9b96fff8f1b5b7cb9d444d81d22b9f6f466ec2628b875484933eaad" , 
+            "apiKeyCreatedAt" : { "$date" : "2013-08-26T18:10:56.193Z"} ,
+            "email" : "devidd57@example.org" , 
+            "emailVerified" : false , 
+            "isBanned" : false , 
+            "lang" : "en" , 
+            "password" : "33fb8af59dfd1e98134a09f96beb57304411f2b1de652726d32094e6122a5bd59105a1f4318742b032e2420f062dee3316e8d642f2fe41ec68d2549f4610503c" ,
+            "profileComplete" : true ,
+            "roles" : [ ] , 
+            "root" : false , 
+            "salt" : "bdf8eabf5fb3ad08e218252b398b3d3c1523c9d01c86177d65845d390abd6111b25bac4ce87b034f2b955a59ac4a2b8e2e1e793c30d81acdbbd53a3363d4307e" , 
+            "username" : "devidd"
+        }
+]
+}
+
+Get one particular user
+GET /api/rest/user/:_id
+< 200
+< Content-Type: application/json
+{ 
+            "__v" : 0 , 
+            "_id" : 
+            { "$oid" : "5215f4e6cbf4096e10000001"} , 
+            "apiKey" : "faa2819134c61e69e74d4a5cf53618cdba5774b962ef547281fe31f8e0aaf0953e373790da6931004233564d3c902e2464c70904046cf7a3b113711b7d3b73b7" , 
+            "apiKeyCreatedAt" : { "$date" : "2013-08-22T11:24:22.849Z"} , 
+            "email" : "nowak@gmail.com" , 
+            "emailVerified" : true , 
+            "firstName" : "Anatolij" , 
+            "lastName" : "Nowak-Ostroumov" , 
+            "isBanned" : false , 
+            "isOnline" : true,
+            "lang" : "en" , 
+            "lastSeenOnline" : { "$date" : "2013-08-28T22:26:14.744Z"} , 
+            "password" : "f02a90f3747eb6401f46dfc4170cff32269a7eae187a1a9d45aa3d6a095652614beaada7d581f7f4be76de26b1d3ddfd5e0abd60039a2d31da17b30d114951ee" , 
+            "profileComplete" : true , 
+            "roles" : [ ] , 
+            "root" : true , 
+            "salt" : "223817bf61bb3e962efb56a42d8324a3831155ed4ee2a099f6ac83ccf534062b3e470f4f3ec57097312d8475bfd748ea41ba1682668d3bc18b74c6b3300aeaf3" , 
+            "username" : "vodolaz095"
+        }
+
+Update one user
+PUT /api/rest/user/:_id
+< 202
+< Content-Type: application/json
+        
+
+
+Delete one user
+DELETE /api/rest/user/:_id
+< 202
+< Content-Type: application/json
+        
+
+

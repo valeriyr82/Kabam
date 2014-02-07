@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CoreFrontend">
+<head>
+    <meta charset="utf-8">
+    <title ng-bind="$state.current.name">Kabam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[[description]]"/>
+    <meta name="keywords" content="[[keywords]]"/>
+    [[#doIndex]]
+    <meta name="robots" content="all"/>
+    [[/doIndex]]
+    [[^doIndex]]
+    <meta name="robots" content="none">
+    [[/doIndex]]
+    [[#css]]styles/main.css[[/css]]
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body>
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">Kabam</a>
+            <ul class="nav" ng-hide="authService.isAuthenticated()" ng-cloak>
+                <li><a ui-sref='login'>Log in</a></li>
+                <li><a ui-sref='signup'>Sign up</a></li>
+            </ul>
+            <ul class="nav pull-right" ng-show="authService.isAuthenticated()" ng-cloak>
+                <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
+                <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="flash">
+[[#flash]]
+[[#error]]
+<div class="alert alert-error">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong>[[error]]</strong>
+</div>
+[[/error]]
+[[#success]]
+<div class="alert alert-success">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong>[[success]]</strong>
+</div>
+[[/success]]
+[[#info]]
+<div class="alert alert-info">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong>[[info]]</strong>
+</div>
+[[/info]]
+[[/flash]]
+</div>
+
+<div class="container">
+    <div class="row-fluid">
+        [[={{ }}=]]
+        {{{ yield }}}
+        {{=[[ ]]=}}
+    </div>
+    <div class="span12">
+        <p>&copy; 2013 - <a href="https://github.com/mykabam">MyKabam</a></p>
+    </div>
+</div>
+<script type="text/javascript">
+    window.CONFIG = {
+        signUpURL: '/auth/signup',
+        loginURL: '/auth/login',
+        logoutURL: '/auth/logout'
+    };
+    window.USER = [[& user ]];
+</script>
+[[#js]]kabam/app.js[[/js]]
+<script type="text/javascript">
+if (typeof io !== 'undefined') {
+    var socket = io.connect();
+    socket.on('broadcast', function (data) {
+        $('#clock').html(data.time);
+    });
+    socket.on('notify', function (data) {
+        $('#flash').append('<div class="alert alert-info"><a class="close" data-dismiss="alert">×</a><strong>'+data.message+'</strong></div>');
+    });
+}
+function logoff() {
+    $.post('/auth/logout', {'_csrf': "[[csrf]]" }, function (data) {
+        window.location.href = '/';
+    });
+}
+setInterval(function () {
+    $('div.alert').hide('slow');
+}, 5000);
+</script>
+</body>
+</html>

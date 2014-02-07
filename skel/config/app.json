@@ -1,0 +1,36 @@
+{
+  "__comment":"Values prepended by __ are comments to actual values, without __ on the beginning",
+  "__app.json":"This config file contains application parameters, there is no sensitive data and this file can be commited to public repository.",
+
+  "spine": {
+    "domains": ["urgentTasks","normalTasks","lowPriorityTasks"]
+  },
+
+  "io":{
+    "enabled": true,
+    "loglevel":1,
+    "__loglevel":"Log level for socket.io. 10 - very verbose, 1 - less verbose."
+  },
+
+
+  "startCluster":false,
+  "__startCluster":"Boolean. Start application as a cluster with 1 node process per CPU core. We recommend to enable it staging and production. ",
+  "limitWorkers":2,
+  "__limitWorkers":"Positive ingerer. This value allows us to limit max number of worker processes spawn by kabam.startCluster() command. If this value is not set, we spawn number of workers equal to number of CPU cores",
+
+
+  "logs":{
+    "filelog": true,
+    "__filelog":"Boolean. Store logs in logs/ directory",
+
+    "httpMongo":true,
+    "__httpMongo":"Boolean. Enable logging HTTP requests in mongo database",
+    "errorMongo":true,
+    "__errorMongo":"Boolean. Enable logging errors in mongo database"
+  },
+
+  "public": "./public",
+  "__public": "String. Path for custom static asset files (js, css, images)",
+  "views": "./views",
+  "__views": "String. Path for custome view files (html)"
+}

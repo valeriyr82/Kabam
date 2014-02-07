@@ -1,0 +1,6 @@
+{
+  "name": "kabam",
+  "dependencies": {
+    "kabam-core-web-frontend": "https://github.com/mykabam/core-web-frontend.git"
+  }
+}

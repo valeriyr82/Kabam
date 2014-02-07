@@ -1,0 +1,94 @@
+{
+  "name": "kabam",
+  "version": "0.0.3",
+  "description": "Kabam. Higher level application framework",
+  "main": "index.js",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "scripts": {
+    "start": "node example/example.js",
+    "test": "./node_modules/.bin/grunt test"
+  },
+  "bin": {
+    "kabam": "bin/kabam.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mykabam/kabam.git"
+  },
+  "keywords": [
+    "kabam",
+    "high level framework",
+    "framework"
+  ],
+  "author": "Anatolij Ostroumov",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Keith Williams (copyright owner)",
+      "url": "http://mywebclass.org",
+      "email": "keith@mywebclass.org"
+    },
+    {
+      "name": "Anatolij Ostroumov (responsible developer)",
+      "url": "https://github.com/vodolaz095",
+      "email": "ostroumov095@gmail.com"
+    },
+    {
+      "name": "The Budiman (developer)",
+      "url": "https://github.com/valmy",
+      "email": "tbudiman@gmail.com"
+    },
+    {
+      "name": "Alexander Petrovich (developer)",
+      "url": "https://github.com/chopachom"
+    },
+    {
+      "name": "Muhammad Ghazali (developer)",
+      "url": "https://github.com/muhammadghazali",
+      "email": "muhammadghazali2480@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "async": "*",
+    "commander": "1.3.2",
+    "ncp": "*",
+    "colors": "*",
+    "express": "~3",
+    "kabam-kernel": "https://github.com/mykabam/kabam-kernel/tarball/master",
+    "kabam-plugin-hogan": "https://github.com/mykabam/kabam-plugin-hogan/tarball/master",
+    "kabam-plugin-geoip": "https://github.com/mykabam/kabam-plugin-geoip/tarball/master",
+    "kabam-plugin-welcome": "https://github.com/mykabam/kabam-plugin-welcome/tarball/master",
+    "kabam-plugin-my-profile": "https://github.com/mykabam/kabam-plugin-my-profile/tarball/master",
+    "kabam-plugin-notify-email": "https://github.com/mykabam/kabam-plugin-notify-email/tarball/master",
+    "kabam-plugin-rest": "https://github.com/mykabam/kabam-plugin-rest/tarball/master",
+    "kabam-plugin-spine": "https://github.com/mykabam/kabam-plugin-spine/tarball/master",
+    "kabam-plugin-users": "https://github.com/mykabam/kabam-plugin-users/tarball/master",
+    "kabam-plugin-private-message": "https://github.com/mykabam/kabam-plugin-private-message/tarball/master",
+    "kabam-core-web-frontend": "https://github.com/mykabam/core-web-frontend/tarball/master",
+    "kabam-plugin-logger-file": "https://github.com/mykabam/kabam-plugin-logger-file/tarball/master",
+    "kabam-plugin-logger-http-mongo": "https://github.com/mykabam/kabam-plugin-logger-http-mongo/tarball/master",
+    "kabam-plugin-logger-error-mongo": "https://github.com/mykabam/kabam-plugin-logger-error-mongo/tarball/master",
+    "bower": "*",
+    "mincer": "*",
+    "less": "~1.4.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "request": "*",
+    "grunt-simple-mocha": "*",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-ngdocs": "*",
+    "grunt-contrib-clean": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/mykabam/kabam/issues"
+  }
+}

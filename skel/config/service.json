@@ -1,0 +1,25 @@
+{
+  "__comment": "Values prepended by __ are comments to actual values, without __ on the beginning",
+  "__service.json": "This config file contains sensitive information, that can be overriden by enviroment values - https://github.com/mykabam/kabam#enviroment.",
+
+  "hostUrl": false,
+  "__hostUrl": "The canonical url of this host - for example, http://mykabam.herokuapp.com, if set to false, it is quessed from http://'+os.hostname()+'/ ",
+
+  "secret": false,
+  "__secret": "salf for encrypting sessions, if left to false, session salt generated pseudo randomly (not recommended!)",
+
+  "emailConfig": false,
+  "__emailConfig": "Configuration for SMTP server for sending email. For now only the gmail is supported. Example - 'mymail@gmail.com:mypassword'  ",
+
+  "GITHUB_CLIENT_ID": false,
+  "GITHUB_CLIENT_SECRET": false,
+  "__GITHUB_CLIENT": "Parameters for setting oAUTH authorization for github. If both are false, github authorization is disabled. More information - https://github.com/settings/applications/new",
+
+  "TWITTER_CONSUMER_KEY": false,
+  "TWITTER_CONSUMER_SECRET": false,
+  "__TWITTER_CONSUMER": "Parameters for setting oAUTH authorization for twitter. If both are false, github authorization is disabled. More information - https://dev.twitter.com/apps",
+
+  "FACEBOOK_APP_ID": false,
+  "FACEBOOK_APP_SECRET": false,
+  "__FACEBOOK_APP": "Parameters for setting oAUTH authorization for facebook. If both are false, github authorization is disabled. More information - http://developers.facebook.com/"
+}
